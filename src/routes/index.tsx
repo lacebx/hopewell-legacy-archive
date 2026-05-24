@@ -47,6 +47,9 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background" />
         </motion.div>
 
+        {/* Drifting archival dust — Three.js */}
+        <DustCanvas className="pointer-events-none absolute inset-0 z-[5]" />
+
         <motion.div style={{ opacity }} className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-end px-6 pb-24 lg:px-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
