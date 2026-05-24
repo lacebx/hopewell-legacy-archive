@@ -123,8 +123,12 @@ function Home() {
       </section>
 
       {/* MISSION */}
-      <section className="relative border-y border-border bg-[oklch(0.16_0.01_55)] py-32">
-        <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
+      <section className="relative overflow-hidden border-y border-border bg-[oklch(0.16_0.01_55)] py-32">
+        {/* Three.js constellation — kinship as star chart */}
+        <ConstellationCanvas className="pointer-events-none absolute inset-0 opacity-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.16_0.01_55)_75%)]" />
+
+        <div className="relative mx-auto max-w-[1100px] px-6 lg:px-10">
           <Reveal>
             <p className="eyebrow text-center">Our Mission</p>
           </Reveal>
