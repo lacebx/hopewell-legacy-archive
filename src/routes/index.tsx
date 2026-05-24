@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
+import { DustCanvas } from "@/components/dust-canvas";
+import { ConstellationCanvas } from "@/components/constellation-canvas";
 import heroImg from "@/assets/hero-cemetery.jpg";
 import mapImg from "@/assets/territory-map.jpg";
 import familyImg from "@/assets/family-archive.jpg";
