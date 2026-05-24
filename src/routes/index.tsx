@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
+import { DustCanvas } from "@/components/dust-canvas";
+import { ConstellationCanvas } from "@/components/constellation-canvas";
 import heroImg from "@/assets/hero-cemetery.jpg";
 import mapImg from "@/assets/territory-map.jpg";
 import familyImg from "@/assets/family-archive.jpg";
@@ -44,6 +46,9 @@ function Home() {
           <img src={heroImg} alt="Hopewell Cemetery at golden hour" className="h-[120%] w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background" />
         </motion.div>
+
+        {/* Drifting archival dust — Three.js */}
+        <DustCanvas className="pointer-events-none absolute inset-0 z-[5]" />
 
         <motion.div style={{ opacity }} className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-end px-6 pb-24 lg:px-10">
           <motion.p
@@ -118,8 +123,12 @@ function Home() {
       </section>
 
       {/* MISSION */}
-      <section className="relative border-y border-border bg-[oklch(0.16_0.01_55)] py-32">
-        <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
+      <section className="relative overflow-hidden border-y border-border bg-[oklch(0.16_0.01_55)] py-32">
+        {/* Three.js constellation — kinship as star chart */}
+        <ConstellationCanvas className="pointer-events-none absolute inset-0 opacity-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.16_0.01_55)_75%)]" />
+
+        <div className="relative mx-auto max-w-[1100px] px-6 lg:px-10">
           <Reveal>
             <p className="eyebrow text-center">Our Mission</p>
           </Reveal>
