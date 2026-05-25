@@ -25,13 +25,6 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const timeline = [
-  { year: "Pre-1830", title: "Native Homelands", body: "Before removal, the lands along the Washita were home to Indigenous peoples whose presence shaped every trail, river crossing, and gathering ground." },
-  { year: "1830s", title: "The Removal Era", body: "The Cherokee, Choctaw, Chickasaw, and others were forced west into Indian Territory — carrying with them the Black families bound to them by slavery and, eventually, by kinship." },
-  { year: "1860s", title: "Emancipation in the Territory", body: "Treaties of 1866 recognized Freedmen of the tribes. Communities of Black and Native families began to root themselves to the land in their own right." },
-  { year: "Late 1800s", title: "Cherokee Town & Hopewell", body: "A trading settlement on the Washita River crossing — Cherokee Town — anchored the surrounding farms, churches, and the small community known as Hopewell." },
-  { year: "1907 →", title: "Statehood & Forgetting", body: "Oklahoma statehood erased many of these places from the official map. The headstones, the names, the kinships — they remained. Quietly. Patiently. Waiting." },
-];
 
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
