@@ -5,6 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
 import { DustCanvas } from "@/components/dust-canvas";
 import { ConstellationCanvas } from "@/components/constellation-canvas";
+import { EraTimeline } from "@/components/era-timeline";
 import heroImg from "@/assets/hero-cemetery.jpg";
 import mapImg from "@/assets/territory-map.jpg";
 import familyImg from "@/assets/family-archive.jpg";
