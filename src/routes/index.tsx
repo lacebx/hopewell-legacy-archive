@@ -146,44 +146,29 @@ function Home() {
         </div>
       </section>
 
-      {/* TIMELINE */}
+      {/* INTERACTIVE 3D TIMELINE */}
       <section className="relative py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="grid gap-16 lg:grid-cols-12">
-            <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <p className="eyebrow">A history in five movements</p>
-                <h2 className="mt-6 font-serif text-4xl leading-tight text-foreground md:text-6xl">
-                  The land remembers what the map forgot.
-                </h2>
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                  This is not Oklahoma history in the general sense. This is the
-                  specific, sacred history of one stretch of Washita riverbank —
-                  and the people whose lives gave it meaning.
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-8">
-              <ol className="relative space-y-16 border-l border-border pl-10">
-                {timeline.map((item, i) => (
-                  <Reveal key={item.year} delay={i * 0.08}>
-                    <li className="relative">
-                      <span className="absolute -left-[46px] top-2 flex h-3 w-3 items-center justify-center">
-                        <span className="absolute inset-0 rounded-full bg-primary/30 blur-sm" />
-                        <span className="relative h-2 w-2 rounded-full bg-primary" />
-                      </span>
-                      <p className="font-mono text-xs uppercase tracking-[0.28em] text-primary">{item.year}</p>
-                      <h3 className="mt-3 font-serif text-3xl text-foreground md:text-4xl">{item.title}</h3>
-                      <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">{item.body}</p>
-                    </li>
-                  </Reveal>
-                ))}
-              </ol>
-            </div>
+          <div className="mb-16 max-w-3xl">
+            <Reveal>
+              <p className="eyebrow">A history in five movements</p>
+              <h2 className="mt-6 font-serif text-4xl leading-tight text-foreground md:text-6xl">
+                The land remembers what the map forgot.
+              </h2>
+              <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Each cluster in the constellation marks an era. Select one to
+                illuminate its stars — and the archival rooms that carry its
+                record forward.
+              </p>
+            </Reveal>
           </div>
+
+          <Reveal>
+            <EraTimeline />
+          </Reveal>
         </div>
       </section>
+
 
       {/* FEATURED IMAGE — territory map */}
       <section className="relative grain overflow-hidden border-y border-border">
