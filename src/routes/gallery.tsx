@@ -14,7 +14,7 @@ export const Route = createFileRoute("/gallery")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "Gallery — Hopewell Cemetery Association" },
+      { title: "Gallery | Hopewell Cemetery Association" },
       { name: "description", content: "Photographs, maps, scanned documents, and historical references from the Hopewell archive." },
       { property: "og:image", content: hero },
     ],
@@ -39,7 +39,7 @@ function Page() {
       <PageHero
         eyebrow="Chapter IV · Plates"
         title="The Gallery"
-        subtitle="A visual record — photographs, maps, and documents preserved for the families and for the historical memory of Indian Territory."
+        subtitle="A visual record, photographs, maps, and documents preserved for the families and for the historical memory of Indian Territory."
         image={hero}
       />
 
@@ -73,7 +73,7 @@ function Page() {
           <div className="relative max-h-[90vh] max-w-5xl">
             <img src={plates[open].src} alt={plates[open].caption} className="max-h-[80vh] w-auto object-contain" />
             <p className="mt-4 text-center font-serif text-sm italic text-muted-foreground">
-              Plate {String(open + 1).padStart(2, "0")} — {plates[open].caption}
+              Plate {String(open + 1).padStart(2, "0")}, {plates[open].caption}
             </p>
             <button
               onClick={() => setOpen(null)}

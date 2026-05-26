@@ -7,7 +7,7 @@ export const Route = createFileRoute("/preservation")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "Preservation & Donations — Hopewell Cemetery Association" },
+      { title: "Preservation & Donations | Hopewell Cemetery Association" },
       { name: "description", content: "Support the restoration, marking, and educational preservation of Hopewell Cemetery and its history." },
       { property: "og:image", content: hero },
     ],
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/preservation")({
 });
 
 const goals = [
-  { num: "01", title: "Restoration", body: "Cleaning, resetting, and conservation of every standing headstone — and the documented recovery of those that have fallen." },
+  { num: "01", title: "Restoration", body: "Cleaning, resetting, and conservation of every standing headstone, and the documented recovery of those that have fallen." },
   { num: "02", title: "Historical marker", body: "A permanent state and federally recognized marker honoring the Hopewell Community and Cherokee Town." },
   { num: "03", title: "Education", body: "Curriculum partnerships with Oklahoma schools and tribal nations to teach the lived history of Indian Territory's Black and Native families." },
   { num: "04", title: "Digital archive", body: "Expansion of the lineage record, oral history collection, and document scanning program housed on this site." },
@@ -41,7 +41,7 @@ function Page() {
                 We are restoring more than stone.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                Every donation — large or small — protects a name, a lineage, and
+                Every donation, large or small, protects a name, a lineage, and
                 a piece of American history that the official record nearly let
                 slip away. The Hopewell Cemetery Association is a 501(c)(3)
                 nonprofit; contributions are tax-deductible to the extent

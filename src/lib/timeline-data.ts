@@ -20,6 +20,8 @@ export type ArchivalCard = {
   title: string;
   years: string;
   excerpt: string;
+  /** Links to /archive/$slug when set */
+  familySlug?: string;
 };
 
 export const ERAS: Era[] = [
@@ -35,7 +37,7 @@ export const ERAS: Era[] = [
     id: "1830s",
     year: "1830s",
     title: "The Removal Era",
-    body: "The Cherokee, Choctaw, Chickasaw, and others were forced west into Indian Territory — carrying with them the Black families bound to them by slavery and, eventually, by kinship.",
+    body: "The Cherokee, Choctaw, Chickasaw, and others were forced west into Indian Territory, carrying with them the Black families bound to them by slavery and, eventually, by kinship.",
     clusters: ["removal", "homelands"],
     arcT: Math.PI * 0.25,
   },
@@ -51,7 +53,7 @@ export const ERAS: Era[] = [
     id: "late-1800s",
     year: "Late 1800s",
     title: "Cherokee Town & Hopewell",
-    body: "John Shirley's log trading post, cotton gin, and blacksmith anchored the Washita ford — while Hopewell's log schoolhouse and church became the spiritual heart of Chickasaw and Choctaw Freedmen families just miles northeast.",
+    body: "John Shirley's log trading post, cotton gin, and blacksmith anchored the Washita ford, while Hopewell's log schoolhouse and church became the spiritual heart of Chickasaw and Choctaw Freedmen families just miles northeast.",
     clusters: ["settlement", "emancipation"],
     arcT: Math.PI * 0.75,
   },
@@ -59,7 +61,7 @@ export const ERAS: Era[] = [
     id: "1907",
     year: "1907 →",
     title: "Statehood & Forgetting",
-    body: "The Santa Fe Railway bypassed Cherokee Town and Hopewell in 1906; merchants built Pauls Valley and Wynnewood along the tracks. Statehood redrew the maps — but the cemetery, the Stevensons, and the kinships remained.",
+    body: "The Santa Fe Railway bypassed Cherokee Town and Hopewell in 1906; merchants built Pauls Valley and Wynnewood along the tracks. Statehood redrew the maps, but the cemetery, the Stevensons, and the kinships remained.",
     clusters: ["statehood", "settlement"],
     arcT: Math.PI,
   },
@@ -83,8 +85,8 @@ export const ARCHIVAL_CARDS: ArchivalCard[] = [
     clusters: ["homelands"],
     kind: "Land & memory",
     title: "Washita crossing trails",
-    years: "Antiquity – 1830",
-    excerpt: "River fords and gathering grounds along the Washita — mapped in oral tradition long before state lines.",
+    years: "Antiquity-1830",
+    excerpt: "River fords and gathering grounds along the Washita, mapped in oral tradition long before state lines.",
   },
   {
     id: "folsom-kinship",
@@ -92,8 +94,9 @@ export const ARCHIVAL_CARDS: ArchivalCard[] = [
     clusters: ["homelands", "removal"],
     kind: "Choctaw kinship",
     title: "Folsom marriage records",
-    years: "1848 – 1912",
+    years: "1848-1912",
     excerpt: "Marriage records connect the Folsom family to Hopewell through the late 1880s. Burial confirmed by surviving headstone fragment.",
+    familySlug: "folsom",
   },
   {
     id: "removal-roll",
@@ -101,7 +104,7 @@ export const ARCHIVAL_CARDS: ArchivalCard[] = [
     clusters: ["removal"],
     kind: "Removal era",
     title: "Trail of Tears correspondence",
-    years: "1838 – 1840",
+    years: "1838-1840",
     excerpt: "Letters and muster lists documenting families who arrived in Indian Territory with Cherokee and Choctaw nations.",
   },
   {
@@ -110,17 +113,19 @@ export const ARCHIVAL_CARDS: ArchivalCard[] = [
     clusters: ["emancipation", "settlement"],
     kind: "Freedman lineage",
     title: "Smith family record",
-    years: "1842 – 1919",
+    years: "1842-1919",
     excerpt: "Among the earliest documented burials at Hopewell. Cherokee and Freedman citizenship recorded in the Dawes Rolls of 1902.",
+    familySlug: "smith",
   },
   {
     id: "perry-church",
     eraIds: ["1860s"],
     clusters: ["emancipation"],
     kind: "Freedman lineage",
-    title: "Perry — lay preacher",
-    years: "1851 – 1925",
+    title: "Perry, lay preacher",
+    years: "1851-1925",
     excerpt: "Schoolteacher and lay preacher. Oral histories from three descendant families confirm decades of service to the community.",
+    familySlug: "perry",
   },
   {
     id: "vann-washita",
@@ -128,17 +133,19 @@ export const ARCHIVAL_CARDS: ArchivalCard[] = [
     clusters: ["settlement"],
     kind: "Cherokee Freedman",
     title: "Vann farm ledger",
-    years: "1855 – 1930",
+    years: "1855-1930",
     excerpt: "Farmed along the Washita bottoms east of Cherokee Town. Oral history places the family at the founding of the Hopewell church.",
+    familySlug: "vann",
   },
   {
     id: "walker-bible",
     eraIds: ["late-1800s", "1907"],
     clusters: ["settlement", "statehood"],
-    kind: "Native–Black household",
+    kind: "Native-Black household",
     title: "Walker family bible",
-    years: "1869 – 1934",
+    years: "1869-1934",
     excerpt: "Last recorded burial of the original generation. More than forty relations listed by descendants in Oklahoma City.",
+    familySlug: "walker",
   },
   {
     id: "brown-photos",
@@ -146,36 +153,39 @@ export const ARCHIVAL_CARDS: ArchivalCard[] = [
     clusters: ["statehood"],
     kind: "Continuing line",
     title: "Brown photograph collection",
-    years: "1860s – present",
+    years: "1860s-present",
     excerpt: "Descendants still living in Garvin County. Custodians of one of the few surviving photograph collections from the original community.",
+    familySlug: "brown",
   },
   {
     id: "stevenson-allotment",
     eraIds: ["late-1800s", "1907"],
     clusters: ["settlement", "statehood"],
     kind: "Chickasaw Freedmen",
-    title: "Stevenson allotment — Wildhorse Creek",
+    title: "Stevenson allotment, Wildhorse Creek",
     years: "Allotment era",
     excerpt:
       "Generations of Stevensons fought for tribal recognition; following the Allotment Act, the family secured land near Wildhorse Creek and Garvin County acreage.",
+    familySlug: "stevenson",
   },
   {
     id: "harper-broncos",
     eraIds: ["late-1800s"],
     clusters: ["settlement"],
     kind: "Cattle trade",
-    title: "Harper — bronc breaker",
+    title: "Harper, bronc breaker",
     years: "Late 1800s",
     excerpt:
       "Birthet Harper gained regional fame for exceptional skill breaking wild broncos for ranching outfits across cattle country.",
+    familySlug: "harper",
   },
   {
     id: "railway-bypass",
     eraIds: ["1907"],
     clusters: ["statehood"],
     kind: "Rail & relocation",
-    title: "Santa Fe bypass — 1906",
-    years: "1906 – 1907",
+    title: "Santa Fe bypass, 1906",
+    years: "1906-1907",
     excerpt:
       "The Atchison, Topeka and Santa Fe Railway bypassed Cherokee Town and Hopewell; residents relocated to Pauls Valley and Wynnewood before statehood.",
   },

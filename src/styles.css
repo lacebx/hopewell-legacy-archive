@@ -154,4 +154,21 @@
     text-transform: uppercase;
     color: var(--color-gold);
   }
+
+  /* Era timeline: horizontal pan only; vertical wheel passes to the page */
+  .timeline-horizontal-scroll {
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+    scrollbar-color: oklch(0.72 0.1 75 / 50%) oklch(0.18 0.012 55);
+    scrollbar-width: thin;
+  }
+
+  .timeline-horizontal-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .timeline-horizontal-scroll::-webkit-scrollbar-thumb {
+    background: oklch(0.72 0.1 75 / 45%);
+    border-radius: 3px;
+  }
 }

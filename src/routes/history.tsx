@@ -21,7 +21,7 @@ export const Route = createFileRoute("/history")({
     meta: [
       {
         title:
-          "The Crossroads of Freedom — Cherokee Town, Hopewell & the Stevenson Legacy",
+          "The Crossroads of Freedom, Cherokee Town: Hopewell & the Stevenson Legacy",
       },
       {
         name: "description",
@@ -41,7 +41,7 @@ function Page() {
       <PageHero
         eyebrow="Historical context"
         title="The Crossroads of Freedom"
-        subtitle="Cherokee Town, the Hopewell Community, and the Stevenson lineage of Chickasaw Freedmen — five miles apart along the Washita, forever linked in memory."
+        subtitle="Cherokee Town, the Hopewell Community, and the Stevenson lineage of Chickasaw Freedmen, five miles apart along the Washita, forever linked in memory."
         image={heroImg}
       />
 
@@ -61,7 +61,7 @@ function Page() {
           <Reveal>
             <p className="eyebrow text-center">Two connected landmarks</p>
             <h2 className="mx-auto mt-6 max-w-3xl text-center font-serif text-4xl leading-tight text-foreground md:text-5xl">
-              Five miles apart along the Washita — before Oklahoma was Oklahoma.
+              Five miles apart along the Washita, before Oklahoma was Oklahoma.
             </h2>
           </Reveal>
 
@@ -123,7 +123,7 @@ function Page() {
           <Reveal className="mx-auto max-w-[1400px]">
             <p className="eyebrow">Geography of memory</p>
             <p className="mt-6 max-w-2xl font-serif text-2xl italic leading-snug text-foreground md:text-4xl">
-              The Washita River corridor — where ford, trade route, and Freedmen
+              The Washita River corridor, where ford, trade route, and Freedmen
               settlement met on the same stretch of water.
             </p>
             <a
@@ -146,7 +146,7 @@ function Page() {
               <ArchivalFigure
                 src={familyImg}
                 alt="Archival photograph of Chickasaw Freedmen families"
-                caption="The Stevenson legacy and the fight for sovereignty — families who cleared the Washita valley, secured allotments, and held kinship through removal, emancipation, and statehood."
+                caption="The Stevenson legacy and the fight for sovereignty, families who cleared the Washita valley, secured allotments, and held kinship through removal, emancipation, and statehood."
                 source={{
                   label: sources["freedmen-photo"].institution,
                   href: sources["freedmen-photo"].href,
@@ -198,7 +198,7 @@ function Page() {
       <section className="border-y border-border py-24">
         <div className="mx-auto max-w-[900px] px-6 lg:px-10">
           <Reveal>
-            <p className="eyebrow">1906 – 1907</p>
+            <p className="eyebrow">1906-1907</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-foreground md:text-5xl">
               The rise of rail & the fading towns
             </h2>
@@ -236,7 +236,7 @@ function Page() {
               <p className="mt-8 text-base leading-relaxed text-muted-foreground">
                 This historic Freedmen burial ground holds the remains of original
                 trailblazers, Black cowboys, military veterans, and generations of
-                their descendants — while the Stevenson family continues to steward
+                their descendants, while the Stevenson family continues to steward
                 the story.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">

@@ -9,11 +9,11 @@ export const Route = createFileRoute("/cherokee-town")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "Cherokee Town — A vanished crossroads of Indian Territory" },
+      { title: "Cherokee Town: A vanished crossroads of Indian Territory" },
       {
         name: "description",
         content:
-          "The Washita River ford, John Shirley's trading post, and the supply hub that made Hopewell possible — five miles northeast along the corridor.",
+          "The Washita River ford, John Shirley's trading post, and the supply hub that made Hopewell possible, five miles northeast along the corridor.",
       },
       { property: "og:image", content: img },
     ],
@@ -29,25 +29,25 @@ const chapters = [
   },
   {
     num: "02",
-    year: "c. 1850s–80s",
+    year: "c. 1850s-80s",
     title: "John Shirley's trading post",
     body: `Cherokee Town grew into a massive supply hub: stagecoaches, wagon trains, military expeditions, and cattle drives between Fort Sill and Boggy Depot all stopped here. Merchant John Shirley ran a busy log trading post alongside a general store, cotton gin, blacksmith, and local doctor.`,
   },
   {
     num: "03",
-    year: "1860s–70s",
+    year: "1860s-70s",
     title: "Freedmen at the crossroad",
-    body: "After the Civil War, Freedmen families migrating to the Washita valley camped south of the log store for supplies while clearing land — the practical economy that bound Cherokee Town to the rising Hopewell settlement a few miles northeast.",
+    body: "After the Civil War, Freedmen families migrating to the Washita valley camped south of the log store for supplies while clearing land, the practical economy that bound Cherokee Town to the rising Hopewell settlement a few miles northeast.",
   },
   {
     num: "04",
-    year: "1880s–90s",
+    year: "1880s-90s",
     title: "Hopewell rises nearby",
-    body: "Cherokee Town was the marketplace; Hopewell was the home — church, school, and burial ground established a few miles away. Every kind of person Indian Territory had to offer passed through the ford on a Saturday in 1885.",
+    body: "Cherokee Town was the marketplace; Hopewell was the home, church, school, and burial ground established a few miles away. Every kind of person Indian Territory had to offer passed through the ford on a Saturday in 1885.",
   },
   {
     num: "05",
-    year: "1906–07",
+    year: "1906-07",
     title: "Rail bypass & erasure",
     body: STEVENSON_LINEAGE.railwayEra,
   },
@@ -59,7 +59,7 @@ function Page() {
       <PageHero
         eyebrow="Chapter II · Documentary"
         title="Cherokee Town"
-        subtitle="A frontier crossroad at the Washita — trading post, river ford, and the lost hub five miles from Hopewell."
+        subtitle="A frontier crossroad at the Washita, trading post, river ford, and the lost hub five miles from Hopewell."
         image={img}
       />
 

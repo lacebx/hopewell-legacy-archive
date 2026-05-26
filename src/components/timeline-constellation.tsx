@@ -1,16 +1,10 @@
-import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
-import {
-  CLUSTER_META,
-  ERAS,
-  type ClusterId,
-  type EraId,
-} from "@/lib/timeline-data";
+import { CLUSTER_META, type ClusterId } from "@/lib/timeline-data";
 
 const CLUSTER_IDS = Object.keys(CLUSTER_META) as ClusterId[];
 const GOLD = new THREE.Color("#e8c47a");
-const BRONZE = new THREE.Color("#9b6a3a");
 
 function fibonacciSphere(count: number, radius: number): THREE.Vector3[] {
   const pts: THREE.Vector3[] = [];
@@ -103,91 +97,12 @@ function ClusterPoints({
   );
 }
 
-function TimelineArc({
-  activeEraId,
-  onEraSelect,
-}: {
-  activeEraId: EraId;
-  onEraSelect: (id: EraId) => void;
-}) {
-  const group = useRef<THREE.Group>(null!);
-  const curve = useMemo(() => {
-    const pts = ERAS.map((era) => {
-      const t = era.arcT;
-      return new THREE.Vector3(
-        Math.cos(t) * 3.2 - 0.4,
-        Math.sin(t) * 1.1 - 0.2,
-        Math.sin(t * 0.8) * 0.35,
-      );
-    });
-    return new THREE.CatmullRomCurve3(pts);
-  }, []);
-
-  const arcPoints = useMemo(() => {
-    const sampled = curve.getPoints(64);
-    const arr: number[] = [];
-    for (const p of sampled) arr.push(p.x, p.y, p.z);
-    return new Float32Array(arr);
-  }, [curve]);
-
-  useFrame((state) => {
-    if (!group.current) return;
-    group.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.2) * 0.02;
-  });
-
-  return (
-    <group ref={group} position={[-0.4, -0.2, 2.2]}>
-      <line>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            args={[arcPoints, 3]}
-            count={arcPoints.length / 3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color={BRONZE} transparent opacity={0.45} />
-      </line>
-
-      {ERAS.map((era) => {
-        const pos = curve.getPoint(era.arcT / Math.PI);
-        const selected = era.id === activeEraId;
-        return (
-          <mesh
-            key={era.id}
-            position={pos}
-            onClick={(e: ThreeEvent<MouseEvent>) => {
-              e.stopPropagation();
-              onEraSelect(era.id);
-            }}
-            onPointerOver={(e) => {
-              e.stopPropagation();
-              document.body.style.cursor = "pointer";
-            }}
-            onPointerOut={() => {
-              document.body.style.cursor = "";
-            }}
-          >
-            <sphereGeometry args={[selected ? 0.16 : 0.11, 20, 20]} />
-            <meshBasicMaterial
-              color={selected ? GOLD : BRONZE}
-              transparent
-              opacity={selected ? 1 : 0.65}
-            />
-          </mesh>
-        );
-      })}
-    </group>
-  );
-}
-
 function Scene({
-  activeEraId,
   activeClusters,
-  onEraSelect,
+  focusOnDetail,
 }: {
-  activeEraId: EraId;
   activeClusters: Set<ClusterId>;
-  onEraSelect: (id: EraId) => void;
+  focusOnDetail: boolean;
 }) {
   const group = useRef<THREE.Group>(null!);
   const cameraTarget = useRef(new THREE.Vector3(0, 0, 0));
@@ -247,16 +162,19 @@ function Scene({
       dt * 2,
     );
 
+    const detailPan = focusOnDetail ? 1.35 : 0;
     cameraTarget.current.lerp(focusCenter, dt * 2);
-    state.camera.position.lerp(
-      new THREE.Vector3(
-        cameraTarget.current.x * 0.5,
-        cameraTarget.current.y * 0.35,
-        6.5,
-      ),
-      dt * 1.5,
+    const targetCam = new THREE.Vector3(
+      cameraTarget.current.x * 0.5 + detailPan,
+      cameraTarget.current.y * 0.35,
+      focusOnDetail ? 5.8 : 6.5,
     );
-    state.camera.lookAt(cameraTarget.current);
+    state.camera.position.lerp(targetCam, dt * 2.2);
+    state.camera.lookAt(
+      cameraTarget.current.x + detailPan * 0.4,
+      cameraTarget.current.y,
+      cameraTarget.current.z,
+    );
   });
 
   const hasSelection = activeClusters.size > 0;
@@ -276,21 +194,18 @@ function Scene({
           />
         ))}
       </group>
-      <TimelineArc activeEraId={activeEraId} onEraSelect={onEraSelect} />
     </>
   );
 }
 
 export function TimelineConstellation({
   className,
-  activeEraId,
   activeClusters,
-  onEraSelect,
+  focusOnDetail = false,
 }: {
   className?: string;
-  activeEraId: EraId;
   activeClusters: Set<ClusterId>;
-  onEraSelect: (id: EraId) => void;
+  focusOnDetail?: boolean;
 }) {
   return (
     <div className={className} aria-hidden>
@@ -301,11 +216,7 @@ export function TimelineConstellation({
         style={{ touchAction: "none" }}
       >
         <Suspense fallback={null}>
-          <Scene
-            activeEraId={activeEraId}
-            activeClusters={activeClusters}
-            onEraSelect={onEraSelect}
-          />
+          <Scene activeClusters={activeClusters} focusOnDetail={focusOnDetail} />
         </Suspense>
       </Canvas>
     </div>

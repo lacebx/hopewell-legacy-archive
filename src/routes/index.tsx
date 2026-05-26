@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { HistoricalEventId } from "@/lib/family-records";
+import type { EraId } from "@/lib/timeline-data";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { PageShell } from "@/components/page-shell";
@@ -13,11 +15,23 @@ import cherokeeImg from "@/assets/cherokee-town.jpg";
 import headstoneImg from "@/assets/headstone.jpg";
 import communityImg from "@/assets/community.jpg";
 
+type HomeSearch = {
+  era?: EraId;
+  event?: HistoricalEventId;
+};
+
 export const Route = createFileRoute("/")({
+  validateSearch: (search: Record<string, unknown>): HomeSearch => ({
+    era: typeof search.era === "string" ? (search.era as EraId) : undefined,
+    event:
+      typeof search.event === "string"
+        ? (search.event as HistoricalEventId)
+        : undefined,
+  }),
   component: Home,
   head: () => ({
     meta: [
-      { title: "Hopewell Cemetery Association — Before Oklahoma was Oklahoma" },
+      { title: "Hopewell Cemetery Association: Before Oklahoma was Oklahoma" },
       { name: "description", content: "A sacred digital archive preserving the history, lineage, and legacy of the Hopewell Community, Cherokee Town, and the families of Indian Territory." },
       { property: "og:image", content: heroImg },
       { name: "twitter:image", content: heroImg },
@@ -27,6 +41,7 @@ export const Route = createFileRoute("/")({
 
 
 function Home() {
+  const { era, event } = Route.useSearch();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
@@ -41,7 +56,7 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background" />
         </motion.div>
 
-        {/* Drifting archival dust — Three.js */}
+        {/* Drifting archival dust, Three.js */}
         <DustCanvas className="pointer-events-none absolute inset-0 z-[5]" />
 
         <motion.div style={{ opacity }} className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-end px-6 pb-24 lg:px-10">
@@ -73,7 +88,7 @@ function Home() {
           >
             A sacred digital archive preserving the history, lineage, and legacy
             of the Hopewell Community, Cherokee Town, and Chickasaw Freedmen
-            families — including the Stevenson lineage — along the Washita River.
+            families, including the Stevenson lineage, along the Washita River.
           </motion.p>
 
           <motion.div
@@ -118,7 +133,7 @@ function Home() {
 
       {/* MISSION */}
       <section className="relative overflow-hidden border-y border-border bg-[oklch(0.16_0.01_55)] py-32">
-        {/* Three.js constellation — kinship as star chart */}
+        {/* Three.js constellation, kinship as star chart */}
         <ConstellationCanvas className="pointer-events-none absolute inset-0 opacity-50" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0.16_0.01_55)_75%)]" />
 
@@ -129,7 +144,7 @@ function Home() {
           <Reveal delay={0.15}>
             <p className="mx-auto mt-10 max-w-4xl text-center font-serif text-3xl leading-[1.3] text-foreground text-balance md:text-5xl">
               We preserve the ground, the names, and the stories of those who
-              built — and were buried in — the Hopewell Community, so that{" "}
+              built, and were buried in, the Hopewell Community, so that{" "}
               <span className="italic text-primary">no descendant ever again has to wonder if they came from somewhere.</span>
             </p>
           </Reveal>
@@ -163,7 +178,7 @@ function Home() {
       </section>
 
 
-      {/* FEATURED IMAGE — territory map */}
+      {/* FEATURED IMAGE, territory map */}
       <section className="relative grain overflow-hidden border-y border-border">
         <div className="relative h-[70vh] min-h-[500px] w-full">
           <img src={mapImg} alt="Antique map of Indian Territory" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-60" />
@@ -173,11 +188,11 @@ function Home() {
               <div className="max-w-xl">
                 <p className="eyebrow">Cartography of memory</p>
                 <h2 className="mt-6 font-serif text-4xl leading-tight text-foreground md:text-6xl">
-                  Cherokee Town stood here — at the crossing.
+                  Cherokee Town stood here, at the crossing.
                 </h2>
                 <p className="mt-6 text-sm leading-relaxed text-muted-foreground md:text-base">
                   Five miles from Hopewell, John Shirley&apos;s log trading post
-                  anchored the solid-rock ford — stagecoaches, cattle drives, and
+                  anchored the solid-rock ford, stagecoaches, cattle drives, and
                   Freedmen families all passed through Cherokee Town before the
                   railroad chose other paths in 1906.
                 </p>
@@ -210,7 +225,7 @@ function Home() {
                 <div className="absolute -inset-4 border border-primary/30" />
                 <img src={familyImg} alt="Archival family portrait, late 1800s" loading="lazy" className="relative w-full" />
                 <p className="mt-4 font-mono text-[0.65rem] uppercase tracking-[0.28em] text-muted-foreground">
-                  Plate I — composite archival portrait, c. 1890s
+                  Plate I, composite archival portrait, c. 1890s
                 </p>
               </div>
             </Reveal>
@@ -222,15 +237,15 @@ function Home() {
                 </h2>
                 <div className="mt-8 space-y-6 text-base leading-relaxed text-muted-foreground">
                   <p>
-                    For more than a century, Chickasaw and Choctaw Freedmen —
-                    families like the Stevensons, Smiths, Harpers, and Allens —
+                    For more than a century, Chickasaw and Choctaw Freedmen,
+                    families like the Stevensons, Smiths, Harpers, and Allens,
                     lived at the intersection of two erasures: written out of
                     state history, and pushed to the edges of tribal rolls.
                   </p>
                   <p>
                     Their headstones still stand. Their kinships still hold.
-                    Their stories — once spoken in kitchens, churches, and
-                    porches — are being gathered here, deliberately, with
+                    Their stories, once spoken in kitchens, churches, and
+                    porches, are being gathered here, deliberately, with
                     reverence.
                   </p>
                   <p className="font-serif text-2xl italic leading-snug text-foreground">
@@ -274,7 +289,7 @@ function Home() {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-8">
-                    <p className="font-serif text-sm italic text-primary">— {card.num} —</p>
+                    <p className="font-serif text-sm italic text-primary">· {card.num} ·</p>
                     <h3 className="mt-3 font-serif text-2xl text-foreground md:text-3xl">{card.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{card.body}</p>
                     <span className="mt-6 text-xs uppercase tracking-[0.28em] text-primary opacity-0 transition-opacity group-hover:opacity-100">
@@ -301,7 +316,7 @@ function Home() {
               waiting for someone to read it aloud."
             </p>
             <p className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-primary">
-              — From the founding statement
+              From the founding statement
             </p>
           </Reveal>
         </div>
@@ -317,7 +332,7 @@ function Home() {
             </h2>
             <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
               The Hopewell Cemetery Association is a 501(c)(3) nonprofit. Every
-              contribution — financial, ancestral, or oral — protects ground that
+              contribution, financial, ancestral, or oral, protects ground that
               has waited a long time to be remembered.
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-4">
