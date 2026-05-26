@@ -5,7 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
 import { DustCanvas } from "@/components/dust-canvas";
 import { ConstellationCanvas } from "@/components/constellation-canvas";
-import { InteractiveTimeline } from "@/components/interactive-timeline";
+import { EraTimeline } from "@/components/era-timeline";
 import heroImg from "@/assets/hero-cemetery.jpg";
 import mapImg from "@/assets/territory-map.jpg";
 import familyImg from "@/assets/family-archive.jpg";
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/")({
     ],
   }),
 });
+
 
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -138,7 +139,29 @@ function Home() {
         </div>
       </section>
 
-      <InteractiveTimeline />
+      {/* INTERACTIVE 3D TIMELINE */}
+      <section className="relative py-32">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="mb-16 max-w-3xl">
+            <Reveal>
+              <p className="eyebrow">A history in five movements</p>
+              <h2 className="mt-6 font-serif text-4xl leading-tight text-foreground md:text-6xl">
+                The land remembers what the map forgot.
+              </h2>
+              <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Each cluster in the constellation marks an era. Select one to
+                illuminate its stars — and the archival rooms that carry its
+                record forward.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal>
+            <EraTimeline />
+          </Reveal>
+        </div>
+      </section>
+
 
       {/* FEATURED IMAGE — territory map */}
       <section className="relative grain overflow-hidden border-y border-border">
