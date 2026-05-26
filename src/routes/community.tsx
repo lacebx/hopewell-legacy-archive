@@ -9,11 +9,11 @@ export const Route = createFileRoute("/community")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "The Hopewell Community — Hopewell Cemetery Association" },
+      { title: "The Hopewell Community | Hopewell Cemetery Association" },
       {
         name: "description",
         content:
-          "A Freedmen's sanctuary northeast of Cherokee Town — founded in the late 1860s by Chickasaw and Choctaw Freedmen along the Washita River.",
+          "A Freedmen's sanctuary northeast of Cherokee Town, founded in the late 1860s by Chickasaw and Choctaw Freedmen along the Washita River.",
       },
       { property: "og:image", content: img },
     ],
@@ -21,13 +21,13 @@ export const Route = createFileRoute("/community")({
 });
 
 const CEMETERY_SNIPPET =
-  "Hopewell Cemetery — 4 miles north of Wynnewood, east of N County Road 3280 — remains the permanent monument.";
+  "Hopewell Cemetery, 4 miles north of Wynnewood, east of N County Road 3280, remains the permanent monument.";
 
 const sections = [
   {
     eyebrow: "I · Origins",
     title: "A Freedmen's sanctuary on the Washita.",
-    body: `Founded in the late 1860s, the Hopewell Community was established ${LANDMARKS.hopewell.location.toLowerCase()} Its pioneers were Freedmen with deep, generational ties to the Choctaw and Chickasaw nations — families who survived forced removal and the Trail of Tears.`,
+    body: `Founded in the late 1860s, the Hopewell Community was established ${LANDMARKS.hopewell.location.toLowerCase()} Its pioneers were Freedmen with deep, generational ties to the Choctaw and Chickasaw nations, families who survived forced removal and the Trail of Tears.`,
   },
   {
     eyebrow: "II · The anchor",
@@ -37,7 +37,7 @@ const sections = [
   {
     eyebrow: "III · The Stevenson & allied families",
     title: "Clearing land beside Cherokee Town.",
-    body: `${STEVENSON_LINEAGE.fightForSovereignty} Patriarchs including ${STEVENSON_LINEAGE.patriarchs.join("; ")} — alongside the ${STEVENSON_LINEAGE.alliedFamilies.join(", ")} families — built dirt-floor log homes within weeks of arrival.`,
+    body: `${STEVENSON_LINEAGE.fightForSovereignty} Patriarchs including ${STEVENSON_LINEAGE.patriarchs.join("; ")}, alongside the ${STEVENSON_LINEAGE.alliedFamilies.join(", ")} families, built dirt-floor log homes within weeks of arrival.`,
   },
   {
     eyebrow: "IV · Economy & endurance",
@@ -47,7 +47,7 @@ const sections = [
   {
     eyebrow: "V · Continuity",
     title: "What the railroad and statehood could not take.",
-    body: `When the Santa Fe Railway bypassed Hopewell in 1906 and Oklahoma statehood followed in 1907, the town faded from official maps — but families kept returning to bury, remember, and insist this ground meant something. ${CEMETERY_SNIPPET}`,
+    body: `When the Santa Fe Railway bypassed Hopewell in 1906 and Oklahoma statehood followed in 1907, the town faded from official maps, but families kept returning to bury, remember, and insist this ground meant something. ${CEMETERY_SNIPPET}`,
   },
 ];
 
@@ -57,7 +57,7 @@ function Page() {
       <PageHero
         eyebrow="Chapter I"
         title="The Hopewell Community"
-        subtitle="A Freedmen's sanctuary — log school, Sunday church, and generations who cleared the Washita valley."
+        subtitle="A Freedmen's sanctuary, log school, Sunday church, and generations who cleared the Washita valley."
         image={img}
       />
 

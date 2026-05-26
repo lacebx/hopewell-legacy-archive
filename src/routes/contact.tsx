@@ -9,7 +9,7 @@ export const Route = createFileRoute("/contact")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "Contact & Submit Family History — Hopewell Cemetery Association" },
+      { title: "Contact & Submit Family History | Hopewell Cemetery Association" },
       { name: "description", content: "Contact the Hopewell Cemetery Association, submit family histories, photographs, or oral histories." },
       { property: "og:image", content: hero },
     ],
@@ -45,9 +45,9 @@ function Page() {
       return;
     }
     setErrors({});
-    const subject = encodeURIComponent(`Hopewell archive submission — ${parsed.data.name}`);
+    const subject = encodeURIComponent(`Hopewell archive submission, ${parsed.data.name}`);
     const body = encodeURIComponent(
-      `Name: ${parsed.data.name}\nEmail: ${parsed.data.email}\nFamily surname: ${parsed.data.surname ?? "—"}\n\n${parsed.data.message}`
+      `Name: ${parsed.data.name}\nEmail: ${parsed.data.email}\nFamily surname: ${parsed.data.surname ?? "n/a"}\n\n${parsed.data.message}`
     );
     window.location.href = `mailto:HopewellLegacyOK@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
@@ -58,7 +58,7 @@ function Page() {
       <PageHero
         eyebrow="Correspondence"
         title="Contact & Submit Family History"
-        subtitle="Reach out — to ask a question, to add a name, to send a photograph that has been waiting in a shoebox for a generation."
+        subtitle="Reach out to ask a question, to add a name, or to send a photograph that has been waiting in a shoebox for a generation."
         image={hero}
       />
 
@@ -141,7 +141,7 @@ function Page() {
 
                 {sent && (
                   <p className="font-serif text-base italic text-primary">
-                    Thank you. Your message is being prepared for delivery — your
+                    Thank you. Your message is being prepared for delivery. Your
                     email client should open momentarily.
                   </p>
                 )}

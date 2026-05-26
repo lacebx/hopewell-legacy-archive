@@ -8,7 +8,7 @@ export const Route = createFileRoute("/map")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "Cemetery Map — Hopewell Cemetery Association" },
+      { title: "Cemetery Map | Hopewell Cemetery Association" },
       { name: "description", content: "Interactive map of Hopewell Cemetery with searchable burial records and section markers." },
       { property: "og:image", content: hero },
     ],
@@ -105,7 +105,7 @@ function Page() {
                     className="mt-4 w-full border border-border bg-input/40 px-4 py-3 font-serif text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
                   />
                   <p className="mt-3 text-xs italic text-muted-foreground">
-                    Search index in development — placeholder for the public
+                    Search index in development: placeholder for the public
                     record interface launching with the next preservation phase.
                   </p>
                 </div>

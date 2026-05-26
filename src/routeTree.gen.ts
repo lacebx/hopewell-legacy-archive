@@ -19,6 +19,7 @@ import { Route as CommunityRouteImport } from './routes/community'
 import { Route as CherokeeTownRouteImport } from './routes/cherokee-town'
 import { Route as ArchiveRouteImport } from './routes/archive'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArchiveSlugRouteImport } from './routes/archive.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -70,10 +71,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArchiveSlugRoute = ArchiveSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArchiveRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/archive': typeof ArchiveRoute
+  '/archive': typeof ArchiveRouteWithChildren
   '/cherokee-town': typeof CherokeeTownRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
@@ -82,10 +88,11 @@ export interface FileRoutesByFullPath {
   '/map': typeof MapRoute
   '/preservation': typeof PreservationRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/archive/$slug': typeof ArchiveSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/archive': typeof ArchiveRoute
+  '/archive': typeof ArchiveRouteWithChildren
   '/cherokee-town': typeof CherokeeTownRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
@@ -94,11 +101,12 @@ export interface FileRoutesByTo {
   '/map': typeof MapRoute
   '/preservation': typeof PreservationRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/archive/$slug': typeof ArchiveSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/archive': typeof ArchiveRoute
+  '/archive': typeof ArchiveRouteWithChildren
   '/cherokee-town': typeof CherokeeTownRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/map': typeof MapRoute
   '/preservation': typeof PreservationRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/archive/$slug': typeof ArchiveSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/preservation'
     | '/sitemap.xml'
+    | '/archive/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/preservation'
     | '/sitemap.xml'
+    | '/archive/$slug'
   id:
     | '__root__'
     | '/'
@@ -145,11 +156,12 @@ export interface FileRouteTypes {
     | '/map'
     | '/preservation'
     | '/sitemap.xml'
+    | '/archive/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ArchiveRoute: typeof ArchiveRoute
+  ArchiveRoute: typeof ArchiveRouteWithChildren
   CherokeeTownRoute: typeof CherokeeTownRoute
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
@@ -232,12 +244,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/archive/$slug': {
+      id: '/archive/$slug'
+      path: '/$slug'
+      fullPath: '/archive/$slug'
+      preLoaderRoute: typeof ArchiveSlugRouteImport
+      parentRoute: typeof ArchiveRoute
+    }
   }
 }
 
+interface ArchiveRouteChildren {
+  ArchiveSlugRoute: typeof ArchiveSlugRoute
+}
+
+const ArchiveRouteChildren: ArchiveRouteChildren = {
+  ArchiveSlugRoute: ArchiveSlugRoute,
+}
+
+const ArchiveRouteWithChildren =
+  ArchiveRoute._addFileChildren(ArchiveRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ArchiveRoute: ArchiveRoute,
+  ArchiveRoute: ArchiveRouteWithChildren,
   CherokeeTownRoute: CherokeeTownRoute,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,

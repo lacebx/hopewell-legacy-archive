@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell, PageHero } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
+import { FAMILY_RECORDS } from "@/lib/family-records";
 import img from "@/assets/family-archive.jpg";
 import ledger from "@/assets/ledger.jpg";
 
@@ -9,47 +10,40 @@ export const Route = createFileRoute("/archive")({
   component: Page,
   head: () => ({
     meta: [
-      { title: "Family Legacy Archive — Hopewell Cemetery Association" },
-      { name: "description", content: "Stories, obituaries, and lineages of Chickasaw Freedmen and allied families — Stevenson, Smith, Harper, Allen, and the pioneers of Hopewell." },
+      { title: "Family Legacy Archive | Hopewell Cemetery Association" },
+      {
+        name: "description",
+        content:
+          "Stories, obituaries, and lineages of Chickasaw Freedmen and allied families, Stevenson, Smith, Harper, Allen, and the pioneers of Hopewell.",
+      },
       { property: "og:image", content: img },
     ],
   }),
 });
 
-const entries = [
-  { surname: "Stevenson", years: "c. 1860s – present", kind: "Chickasaw Freedmen", excerpt: "Lineage of Mobile Stevenson & Lanie Colbert, Steven Stevenson, and Mack James Stevenson — foundational patriarchs who cleared land south of Cherokee Town and secured allotments near Wildhorse Creek." },
-  { surname: "Smith", years: "1842 – 1919", kind: "Freedman lineage", excerpt: "Among the earliest documented burials at Hopewell. The Smith family carried both Cherokee and Freedman citizenship, recorded in the Dawes Rolls of 1902." },
-  { surname: "Harper", years: "Late 1800s", kind: "Cattle trade", excerpt: "Birthet Harper gained regional fame as a bronc breaker for ranching outfits — emblematic of Hopewell men who worked the territory's cattle country." },
-  { surname: "Allen", years: "1860s – 1900s", kind: "Pioneer household", excerpt: "Allied pioneer family who migrated to the Washita valley with the Stevensons and Smiths during the fight for Freedmen citizenship and land." },
-  { surname: "Vann", years: "1855 – 1930", kind: "Cherokee Freedman", excerpt: "Farmed along the Washita bottoms east of Cherokee Town. Oral history places the family at the founding of the Hopewell church." },
-  { surname: "Brown", years: "1860s – present", kind: "Continuing line", excerpt: "Descendants still living in Garvin County. Custodians of one of the few surviving photograph collections from the original community." },
-  { surname: "Folsom", years: "1848 – 1912", kind: "Choctaw kinship", excerpt: "Marriage records connect the Folsom family to Hopewell through the late 1880s. Burial confirmed by surviving headstone fragment." },
-  { surname: "Perry", years: "1851 – 1925", kind: "Freedman lineage", excerpt: "Schoolteacher and lay preacher. Oral histories from three descendant families confirm decades of service to the community." },
-  { surname: "Walker", years: "1869 – 1934", kind: "Native–Black household", excerpt: "Last recorded burial of the original generation. Family bible held by descendants in Oklahoma City lists more than forty relations." },
-];
-
 function Page() {
   const [filter, setFilter] = useState<string>("All");
-  const kinds = ["All", ...Array.from(new Set(entries.map((e) => e.kind)))];
+  const kinds = ["All", ...Array.from(new Set(FAMILY_RECORDS.map((e) => e.kind)))];
 
-  const visible = filter === "All" ? entries : entries.filter((e) => e.kind === filter);
+  const visible =
+    filter === "All" ? FAMILY_RECORDS : FAMILY_RECORDS.filter((e) => e.kind === filter);
 
   return (
     <PageShell>
       <PageHero
         eyebrow="Chapter III · The Vault"
         title="Family Legacy Archive"
-        subtitle="Stevenson, Smith, Harper, Allen, and the families who built Hopewell — names returned to the page, one lineage at a time."
+        subtitle="Stevenson, Smith, Harper, Allen, and the families who built Hopewell, names returned to the page, one lineage at a time."
         image={img}
       />
 
-      {/* Filter */}
       <section className="border-b border-border py-12">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-3 px-6 lg:px-10">
           <p className="eyebrow mr-4">Filter</p>
           {kinds.map((k) => (
             <button
               key={k}
+              type="button"
               onClick={() => setFilter(k)}
               className={`border px-4 py-2 text-[0.7rem] uppercase tracking-[0.22em] transition ${
                 filter === k
@@ -67,17 +61,23 @@ function Page() {
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
             {visible.map((e, i) => (
-              <Reveal key={e.surname} delay={i * 0.04}>
-                <article className="group relative h-full bg-background p-10 transition-colors hover:bg-card">
-                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-primary">{e.kind}</p>
+              <Reveal key={e.slug} delay={i * 0.04}>
+                <Link
+                  to="/archive/$slug"
+                  params={{ slug: e.slug }}
+                  className="group relative block h-full bg-background p-10 transition-colors hover:bg-card"
+                >
+                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.32em] text-primary">
+                    {e.kind}
+                  </p>
                   <h3 className="mt-6 font-serif text-4xl text-foreground">{e.surname}</h3>
                   <p className="mt-2 font-mono text-xs text-muted-foreground">{e.years}</p>
                   <div className="my-6 hairline w-12" />
                   <p className="text-sm leading-relaxed text-muted-foreground">{e.excerpt}</p>
-                  <button className="mt-8 text-xs uppercase tracking-[0.28em] text-primary opacity-70 transition group-hover:opacity-100">
+                  <span className="mt-8 inline-block text-xs uppercase tracking-[0.28em] text-primary opacity-70 transition group-hover:opacity-100">
                     Open record →
-                  </button>
-                </article>
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -86,7 +86,12 @@ function Page() {
 
       <section className="grain relative overflow-hidden border-y border-border">
         <div className="relative h-[60vh] min-h-[420px]">
-          <img src={ledger} alt="Archival ledger" loading="lazy" className="h-full w-full object-cover opacity-50" />
+          <img
+            src={ledger}
+            alt="Archival ledger"
+            loading="lazy"
+            className="h-full w-full object-cover opacity-50"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
           <div className="relative -mt-[60vh] flex h-[60vh] items-center px-6">
             <div className="mx-auto w-full max-w-[1400px]">
@@ -97,7 +102,7 @@ function Page() {
                     Hold a record we should hold too?
                   </h2>
                   <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                    Photographs, family bibles, letters, recordings — even a name
+                    Photographs, family bibles, letters, recordings, even a name
                     your grandmother spoke once. The archive grows by gift.
                   </p>
                 </div>

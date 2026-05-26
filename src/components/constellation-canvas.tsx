@@ -3,7 +3,7 @@ import { useMemo, useRef, Suspense } from "react";
 import * as THREE from "three";
 
 /**
- * A slowly rotating wireframe globe of points — like an old constellation chart
+ * A slowly rotating wireframe globe of points, like an old constellation chart
  * etched into archival paper. Used as the centerpiece of the timeline section.
  */
 function Constellation() {

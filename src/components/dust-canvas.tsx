@@ -3,7 +3,7 @@ import { useMemo, useRef, Suspense } from "react";
 import * as THREE from "three";
 
 /**
- * Drifting archival dust — golden particles floating slowly through the frame,
+ * Drifting archival dust, golden particles floating slowly through the frame,
  * with subtle parallax response to the cursor. Atmospheric, not decorative.
  */
 function Dust({ count = 1400 }: { count?: number }) {

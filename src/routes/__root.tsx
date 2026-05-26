@@ -72,7 +72,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hopewell Cemetery Association — Preserving Indian Territory Legacy" },
+      { title: "Hopewell Cemetery Association: Preserving Indian Territory Legacy" },
       { name: "description", content: "A sacred digital archive preserving the history, lineage, and legacy of the Hopewell Community, Cherokee Town, and the Black and Native families connected to Indian Territory." },
       { name: "author", content: "Hopewell Cemetery Association" },
       { property: "og:title", content: "Hopewell Cemetery Association" },
