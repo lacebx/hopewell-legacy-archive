@@ -5,6 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
 import { DustCanvas } from "@/components/dust-canvas";
 import { ConstellationCanvas } from "@/components/constellation-canvas";
+import { InteractiveTimeline } from "@/components/interactive-timeline";
 import heroImg from "@/assets/hero-cemetery.jpg";
 import mapImg from "@/assets/territory-map.jpg";
 import familyImg from "@/assets/family-archive.jpg";
@@ -23,14 +24,6 @@ export const Route = createFileRoute("/")({
     ],
   }),
 });
-
-const timeline = [
-  { year: "Pre-1830", title: "Native Homelands", body: "Before removal, the lands along the Washita were home to Indigenous peoples whose presence shaped every trail, river crossing, and gathering ground." },
-  { year: "1830s", title: "The Removal Era", body: "The Cherokee, Choctaw, Chickasaw, and others were forced west into Indian Territory — carrying with them the Black families bound to them by slavery and, eventually, by kinship." },
-  { year: "1860s", title: "Emancipation in the Territory", body: "Treaties of 1866 recognized Freedmen of the tribes. Communities of Black and Native families began to root themselves to the land in their own right." },
-  { year: "Late 1800s", title: "Cherokee Town & Hopewell", body: "A trading settlement on the Washita River crossing — Cherokee Town — anchored the surrounding farms, churches, and the small community known as Hopewell." },
-  { year: "1907 →", title: "Statehood & Forgetting", body: "Oklahoma statehood erased many of these places from the official map. The headstones, the names, the kinships — they remained. Quietly. Patiently. Waiting." },
-];
 
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -78,8 +71,8 @@ function Home() {
             className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
           >
             A sacred digital archive preserving the history, lineage, and legacy
-            of the Hopewell Community, Cherokee Town, and the families connected
-            to Indian Territory.
+            of the Hopewell Community, Cherokee Town, and Chickasaw Freedmen
+            families — including the Stevenson lineage — along the Washita River.
           </motion.p>
 
           <motion.div
@@ -145,44 +138,7 @@ function Home() {
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <section className="relative py-32">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="grid gap-16 lg:grid-cols-12">
-            <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <p className="eyebrow">A history in five movements</p>
-                <h2 className="mt-6 font-serif text-4xl leading-tight text-foreground md:text-6xl">
-                  The land remembers what the map forgot.
-                </h2>
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                  This is not Oklahoma history in the general sense. This is the
-                  specific, sacred history of one stretch of Washita riverbank —
-                  and the people whose lives gave it meaning.
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-8">
-              <ol className="relative space-y-16 border-l border-border pl-10">
-                {timeline.map((item, i) => (
-                  <Reveal key={item.year} delay={i * 0.08}>
-                    <li className="relative">
-                      <span className="absolute -left-[46px] top-2 flex h-3 w-3 items-center justify-center">
-                        <span className="absolute inset-0 rounded-full bg-primary/30 blur-sm" />
-                        <span className="relative h-2 w-2 rounded-full bg-primary" />
-                      </span>
-                      <p className="font-mono text-xs uppercase tracking-[0.28em] text-primary">{item.year}</p>
-                      <h3 className="mt-3 font-serif text-3xl text-foreground md:text-4xl">{item.title}</h3>
-                      <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">{item.body}</p>
-                    </li>
-                  </Reveal>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </div>
-      </section>
+      <InteractiveTimeline />
 
       {/* FEATURED IMAGE — territory map */}
       <section className="relative grain overflow-hidden border-y border-border">
@@ -197,16 +153,25 @@ function Home() {
                   Cherokee Town stood here — at the crossing.
                 </h2>
                 <p className="mt-6 text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Stagecoaches, trade routes, and migration paths converged at
-                  the Washita River. What looks like empty land on a modern map
-                  was, for a generation, the center of someone's world.
+                  Five miles from Hopewell, John Shirley&apos;s log trading post
+                  anchored the solid-rock ford — stagecoaches, cattle drives, and
+                  Freedmen families all passed through Cherokee Town before the
+                  railroad chose other paths in 1906.
                 </p>
-                <Link
-                  to="/cherokee-town"
-                  className="mt-8 inline-block border-b border-primary pb-1 text-xs uppercase tracking-[0.28em] text-primary"
-                >
-                  Walk the route →
-                </Link>
+                <div className="mt-8 flex flex-wrap gap-6">
+                  <Link
+                    to="/history"
+                    className="border-b border-primary pb-1 text-xs uppercase tracking-[0.28em] text-primary"
+                  >
+                    Historical context →
+                  </Link>
+                  <Link
+                    to="/cherokee-town"
+                    className="border-b border-border pb-1 text-xs uppercase tracking-[0.28em] text-muted-foreground hover:border-primary hover:text-primary"
+                  >
+                    Cherokee Town →
+                  </Link>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -234,10 +199,10 @@ function Home() {
                 </h2>
                 <div className="mt-8 space-y-6 text-base leading-relaxed text-muted-foreground">
                   <p>
-                    For more than a century, the Black and Native families of
-                    the Hopewell Community lived at the intersection of two
-                    erasures — written out of state history, and pushed to the
-                    edges of tribal rolls.
+                    For more than a century, Chickasaw and Choctaw Freedmen —
+                    families like the Stevensons, Smiths, Harpers, and Allens —
+                    lived at the intersection of two erasures: written out of
+                    state history, and pushed to the edges of tribal rolls.
                   </p>
                   <p>
                     Their headstones still stand. Their kinships still hold.
@@ -271,6 +236,7 @@ function Home() {
 
           <div className="mt-20 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
             {[
+              { to: "/history", num: "·", title: "Historical Context", body: "Cherokee Town, Hopewell, and the Stevenson legacy.", img: mapImg },
               { to: "/community", num: "I", title: "The Hopewell Community", body: "Origins, migration, settlement, kinship.", img: communityImg },
               { to: "/cherokee-town", num: "II", title: "Cherokee Town", body: "Trade routes, the Washita crossing, frontier life.", img: cherokeeImg },
               { to: "/archive", num: "III", title: "Family Legacy Archive", body: "Stories, obituaries, lineages, oral histories.", img: familyImg },

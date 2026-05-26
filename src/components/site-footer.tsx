@@ -20,6 +20,7 @@ export function SiteFooter() {
           <div className="lg:col-span-3">
             <p className="eyebrow">Archive</p>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/history" className="hover:text-primary">Historical Context</Link></li>
               <li><Link to="/community" className="hover:text-primary">The Hopewell Community</Link></li>
               <li><Link to="/cherokee-town" className="hover:text-primary">Cherokee Town</Link></li>
               <li><Link to="/archive" className="hover:text-primary">Family Legacy Archive</Link></li>

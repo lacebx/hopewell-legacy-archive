@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
+import { LANDMARKS, STEVENSON_LINEAGE } from "@/lib/historical-context";
 import img from "@/assets/cherokee-town.jpg";
 import mapImg from "@/assets/territory-map.jpg";
 
@@ -9,18 +10,47 @@ export const Route = createFileRoute("/cherokee-town")({
   head: () => ({
     meta: [
       { title: "Cherokee Town — A vanished crossroads of Indian Territory" },
-      { name: "description", content: "The history of Cherokee Town, the Washita River crossing, and its connection to Hopewell Cemetery." },
+      {
+        name: "description",
+        content:
+          "The Washita River ford, John Shirley's trading post, and the supply hub that made Hopewell possible — five miles northeast along the corridor.",
+      },
       { property: "og:image", content: img },
     ],
   }),
 });
 
 const chapters = [
-  { num: "01", year: "c. 1840", title: "The crossing", body: "A natural ford on the Washita River drew Native traders, drovers, and travelers north and south. Long before any white settlement, this bend in the river had a name in Cherokee, in Chickasaw, and in the languages of the plains." },
-  { num: "02", year: "c. 1850s", title: "The trading post", body: "A small store and stagecoach stop took root on the high ground above the ford. Cherokee Town — never large, never platted on most maps — served as the supply point for ranches, farms, and the Black and Native households spreading along the river." },
-  { num: "03", year: "1860s–70s", title: "After the war", body: "Freedmen returning from the Civil War and from displacement east of the Mississippi gathered here. The town's economy ran on trade, cattle, and the constant movement of people between the tribal nations and the southern states." },
-  { num: "04", year: "1880s–90s", title: "Hopewell rises", body: "A few miles from the trading post, the families established a church, a school, and the burial ground that would become Hopewell Cemetery. Cherokee Town was the marketplace; Hopewell was the home." },
-  { num: "05", year: "Post-1907", title: "Erasure", body: "Statehood redrew the maps, and the railroads chose other towns. Cherokee Town faded from the official record. But the families of Hopewell never stopped saying its name." },
+  {
+    num: "01",
+    year: "c. 1840",
+    title: "The solid-rock ford",
+    body: `A natural river ford on the Washita drew traders and travelers long before platted towns. ${LANDMARKS.cherokeeTown.location} This crossing became one of Indian Territory's vital corridors.`,
+  },
+  {
+    num: "02",
+    year: "c. 1850s–80s",
+    title: "John Shirley's trading post",
+    body: `Cherokee Town grew into a massive supply hub: stagecoaches, wagon trains, military expeditions, and cattle drives between Fort Sill and Boggy Depot all stopped here. Merchant John Shirley ran a busy log trading post alongside a general store, cotton gin, blacksmith, and local doctor.`,
+  },
+  {
+    num: "03",
+    year: "1860s–70s",
+    title: "Freedmen at the crossroad",
+    body: "After the Civil War, Freedmen families migrating to the Washita valley camped south of the log store for supplies while clearing land — the practical economy that bound Cherokee Town to the rising Hopewell settlement a few miles northeast.",
+  },
+  {
+    num: "04",
+    year: "1880s–90s",
+    title: "Hopewell rises nearby",
+    body: "Cherokee Town was the marketplace; Hopewell was the home — church, school, and burial ground established a few miles away. Every kind of person Indian Territory had to offer passed through the ford on a Saturday in 1885.",
+  },
+  {
+    num: "05",
+    year: "1906–07",
+    title: "Rail bypass & erasure",
+    body: STEVENSON_LINEAGE.railwayEra,
+  },
 ];
 
 function Page() {
@@ -29,16 +59,15 @@ function Page() {
       <PageHero
         eyebrow="Chapter II · Documentary"
         title="Cherokee Town"
-        subtitle="A trading settlement at the Washita River crossing — and the lost crossroads that made Hopewell possible."
+        subtitle="A frontier crossroad at the Washita — trading post, river ford, and the lost hub five miles from Hopewell."
         image={img}
       />
 
-      {/* Cinematic chaptered scroll */}
       <section className="py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           {chapters.map((c, i) => (
             <Reveal key={c.num} delay={0}>
-              <article className={`grid gap-10 border-t border-border py-20 lg:grid-cols-12 ${i % 2 === 1 ? "" : ""}`}>
+              <article className="grid gap-10 border-t border-border py-20 lg:grid-cols-12">
                 <div className="lg:col-span-4">
                   <p className="font-mono text-[0.7rem] uppercase tracking-[0.32em] text-primary">
                     Chapter {c.num} · {c.year}
@@ -55,6 +84,14 @@ function Page() {
               </article>
             </Reveal>
           ))}
+          <Reveal>
+            <Link
+              to="/history"
+              className="inline-block border-b border-primary pb-1 text-xs uppercase tracking-[0.28em] text-primary"
+            >
+              Full historical context →
+            </Link>
+          </Reveal>
         </div>
       </section>
 

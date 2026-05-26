@@ -10,14 +10,17 @@ export const Route = createFileRoute("/archive")({
   head: () => ({
     meta: [
       { title: "Family Legacy Archive — Hopewell Cemetery Association" },
-      { name: "description", content: "Stories, obituaries, lineages, oral histories, and archival documents from the families of the Hopewell Community." },
+      { name: "description", content: "Stories, obituaries, and lineages of Chickasaw Freedmen and allied families — Stevenson, Smith, Harper, Allen, and the pioneers of Hopewell." },
       { property: "og:image", content: img },
     ],
   }),
 });
 
 const entries = [
+  { surname: "Stevenson", years: "c. 1860s – present", kind: "Chickasaw Freedmen", excerpt: "Lineage of Mobile Stevenson & Lanie Colbert, Steven Stevenson, and Mack James Stevenson — foundational patriarchs who cleared land south of Cherokee Town and secured allotments near Wildhorse Creek." },
   { surname: "Smith", years: "1842 – 1919", kind: "Freedman lineage", excerpt: "Among the earliest documented burials at Hopewell. The Smith family carried both Cherokee and Freedman citizenship, recorded in the Dawes Rolls of 1902." },
+  { surname: "Harper", years: "Late 1800s", kind: "Cattle trade", excerpt: "Birthet Harper gained regional fame as a bronc breaker for ranching outfits — emblematic of Hopewell men who worked the territory's cattle country." },
+  { surname: "Allen", years: "1860s – 1900s", kind: "Pioneer household", excerpt: "Allied pioneer family who migrated to the Washita valley with the Stevensons and Smiths during the fight for Freedmen citizenship and land." },
   { surname: "Vann", years: "1855 – 1930", kind: "Cherokee Freedman", excerpt: "Farmed along the Washita bottoms east of Cherokee Town. Oral history places the family at the founding of the Hopewell church." },
   { surname: "Brown", years: "1860s – present", kind: "Continuing line", excerpt: "Descendants still living in Garvin County. Custodians of one of the few surviving photograph collections from the original community." },
   { surname: "Folsom", years: "1848 – 1912", kind: "Choctaw kinship", excerpt: "Marriage records connect the Folsom family to Hopewell through the late 1880s. Burial confirmed by surviving headstone fragment." },
@@ -36,7 +39,7 @@ function Page() {
       <PageHero
         eyebrow="Chapter III · The Vault"
         title="Family Legacy Archive"
-        subtitle="A living record of the families connected to Hopewell — names returned to the page, one lineage at a time."
+        subtitle="Stevenson, Smith, Harper, Allen, and the families who built Hopewell — names returned to the page, one lineage at a time."
         image={img}
       />
 
