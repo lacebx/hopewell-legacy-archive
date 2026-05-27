@@ -12,4 +12,14 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      // Dev server: same CORP / CSP as production where the sandbox allows custom headers.
+      // (Lovable sandbox strips custom server.headers; production uses src/server.ts + public/_headers.)
+      headers: {
+        "Cross-Origin-Resource-Policy": "cross-origin",
+        "Content-Security-Policy": "frame-ancestors *",
+      },
+    },
+  },
 });
